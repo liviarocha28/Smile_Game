@@ -1,37 +1,55 @@
-.invisivel{
-    display:none;
-  }
-  .visivel{
-    display:inline;
-  }
-  .inicial {
-    text-align: center;
-    font-size: 100px;
-    background-color: lightgrey;
-    width: 150px;
-    height: 200px;
-    border: 15px solid green;
-    padding: 10px;
-    margin: 20px;
-  }
-  .acertou {
-    text-align: center;
-    color: yellow;
-    background-color: LawnGreen;
-    width: 150px;
-    height: 200px;
-    border: 15px solid yellow;
-    padding: 10px;
-    margin: 20px;
-  }
-  .errou {
-    text-align: center;
-    font-size: 100px;
-    color: white;
-    background-color: red;
-    width: 150px;
-    height: 200px;
-    border: 15px solid black;
-    padding: 10px;
-    margin: 20px;
-  }
+body {
+  background-color: #fff0f5;
+  font-family: Arial, sans-serif;
+  padding-top: 30px;
+}
+
+.carta {
+  font-size: 60px;
+  background-color: #ffe4e1;
+  width: 120px;
+  height: 160px;
+  border: 10px solid #ff69b4;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  
+}
+
+.carta:hover {
+  background-color: #ffc0cb;
+}
+
+.acertou {
+  background-color: #ffb6c1;
+  border-color: #ff1493;
+  color: deeppink;
+  font-weight: bold;
+}
+
+.errou {
+  background-color: #f08080;
+  border-color: #dc143c;
+  color: white;
+}
+
+.invisivel {
+  display: none;
+}
+
+#resposta {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+#cartas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+}
+
