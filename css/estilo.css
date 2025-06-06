@@ -7,8 +7,8 @@ body {
 .carta {
   font-size: 60px;
   background-color: #ffe4e1;
-  width: 120px;
-  height: 160px;
+  width: min(20vw, 120px);
+  height: min(25vw, 160px);
   border: 10px solid #ff69b4;
   margin: 10px;
   display: flex;
@@ -17,11 +17,12 @@ body {
   cursor: pointer;
   border-radius: 15px;
   transition: all 0.3s ease;
-  
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .carta:hover {
   background-color: #ffc0cb;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .acertou {
@@ -29,6 +30,13 @@ body {
   border-color: #ff1493;
   color: deeppink;
   font-weight: bold;
+  animation: pulso 0.5s ease;
+}
+
+@keyframes pulso {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .errou {
@@ -46,10 +54,10 @@ body {
   font-weight: bold;
   margin-top: 20px;
 }
+
 #cartas {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
 }
-

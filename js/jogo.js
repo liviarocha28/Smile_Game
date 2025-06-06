@@ -1,33 +1,42 @@
+// Variáveis globais
 let nivel = 1;
-let tentativasMax = 5;
 let cartasTotal = 9;
+let tentativasMax = 5;
 let tentativas = tentativasMax;
-let posicaoFlamingo = 0;
+let posicaoFlamingo;
 
-const container = document.getElementById("cartas");
 const resposta = document.getElementById("resposta");
 const btnJogarNovamente = document.getElementById("joganovamente");
 const btnReiniciar = document.getElementById("reiniciar");
 
+// Função para criar uma carta
+function criarCarta(id) {
+    const carta = document.createElement("div");
+    carta.className = "carta";
+    carta.id = id;
+    carta.onclick = () => verifica(carta);
+    return carta;
+}
+
+// Função para iniciar ou reiniciar o jogo
 function iniciarJogo() {
-    container.innerHTML = "";
+    resposta.textContent = "";
+    btnJogarNovamente.classList.add("invisivel");
+    btnReiniciar.classList.add("invisivel");
+
+    const cartasContainer = document.getElementById("cartas");
+    cartasContainer.innerHTML = "";
+
     tentativas = tentativasMax;
     posicaoFlamingo = Math.floor(Math.random() * cartasTotal);
 
     for (let i = 0; i < cartasTotal; i++) {
-        const carta = document.createElement("div");
-        carta.id = i;
-        carta.className = "carta inicial";
-        carta.textContent = "?";
-        carta.onclick = () => verifica(carta);
-        container.appendChild(carta);
+        const carta = criarCarta(i);
+        cartasContainer.appendChild(carta);
     }
-
-    resposta.textContent = `Nível ${nivel} — Você tem ${tentativas} tentativas.`;
-    btnJogarNovamente.classList.add("invisivel");
-    btnReiniciar.classList.add("invisivel");
 }
 
+// Verificação do clique
 function verifica(carta) {
     const id = parseInt(carta.id);
 
@@ -47,17 +56,19 @@ function verifica(carta) {
         } else {
             resposta.textContent = `😢 Fim de jogo! O flamingo estava em outra carta.`;
             revelarFlamingo();
-            encerrarJogo(false);
+            setTimeout(() => encerrarJogo(false), 800);
         }
     }
 }
 
+// Revela o flamingo após erro final
 function revelarFlamingo() {
     const carta = document.getElementById(posicaoFlamingo);
     carta.textContent = "🦩";
     carta.classList.add("acertou");
 }
 
+// Encerramento do jogo
 function encerrarJogo(acertou) {
     const cartas = document.querySelectorAll(".carta");
     cartas.forEach(c => c.onclick = null);
@@ -68,15 +79,17 @@ function encerrarJogo(acertou) {
     btnJogarNovamente.textContent = acertou ? "Próximo nível" : "Tentar novamente";
 }
 
+// Botão: Próximo nível / Tentar novamente
 btnJogarNovamente.onclick = () => {
     if (btnJogarNovamente.textContent === "Próximo nível") {
         nivel++;
-        cartasTotal += 3; // aumenta a quantidade de cartas
-        tentativasMax = Math.max(3, tentativasMax - 1); // diminui tentativas até mínimo de 3
+        cartasTotal += 3;
+        tentativasMax = Math.max(3, tentativasMax - 1);
     }
     iniciarJogo();
 };
 
+// Botão: Reiniciar jogo
 btnReiniciar.onclick = () => {
     nivel = 1;
     cartasTotal = 9;
@@ -84,4 +97,6 @@ btnReiniciar.onclick = () => {
     iniciarJogo();
 };
 
+// Inicialização ao carregar
 window.onload = iniciarJogo;
+
